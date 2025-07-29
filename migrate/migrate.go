@@ -3,8 +3,8 @@ package main
 import (
 	"log"
 
+	"sample.com/crud-api/data/models"
 	"sample.com/crud-api/initializers"
-	"sample.com/crud-api/models"
 )
 
 func init() {
@@ -16,8 +16,7 @@ func init() {
 func main() {
 	var err error
 	log.Default().Println("Start Migrate Database...")
-	log.Println("Migrating model User...")
-	err = initializers.DB.AutoMigrate(&models.User{})
+	err = initializers.DB.AutoMigrate(&models.User{}, &models.Category{},&models.Ingredient{},&models.Recipe{},&models.Instruction{})
 	if err != nil {
 		log.Fatal("Migration Failed")
 	}
