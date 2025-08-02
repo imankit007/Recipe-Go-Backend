@@ -2,39 +2,29 @@ package main
 
 import (
 	"fmt"
-	"log"
 
 	"github.com/gin-gonic/gin"
-	"sample.com/crud-api/data/models"
+	"sample.com/crud-api/config"
+	"sample.com/crud-api/initializers"
+	"sample.com/crud-api/router"
 )
 
 func init() {
-	// initializers.LoadEnvVariables()
-	// initializers.ConenctToDb()
+	initializers.LoadEnvVariables()
+	config.InitLog()
 }
 
 func main() {
 	fmt.Print("Running....")
-	r := gin.Default()
 
-	r.GET("/ping", func(ctx *gin.Context) {
+	init := config.Init()
+	app := router.Init(init)
+
+	app.GET("/ping", func(ctx *gin.Context) {
 		ctx.JSON(200, gin.H{
 			"message": "Ankit",
 		})
 	})
 
-	r.POST("/recipe" , func(ctx *gin.Context) {
-		var recipe models.Recipe ;
-
-		if err := ctx.BindJSON(&recipe); err != nil{
-			log.Panic("Parsing Failed for Request")
-			return 
-		}
-
-		fmt.Print(recipe);
-
-
-	 })
-
-	r.Run("0.0.0.0:8080")
+	app.Run("0.0.0.0:8080")
 }

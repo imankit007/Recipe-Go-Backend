@@ -19,3 +19,24 @@ type RecipeControllerImpl struct {
 func (r RecipeControllerImpl) GetAllRecipe(c *gin.Context) {
 	r.svc.GetAllRecipe(c)
 }
+
+func (r RecipeControllerImpl) 	AddRecipe(c *gin.Context) {
+	r.svc.GetAllRecipe(c)
+}
+
+func (r RecipeControllerImpl) GetRecipeById(c *gin.Context) {
+	r.svc.GetAllRecipe(c)
+}
+
+func (r RecipeControllerImpl) UpdateRecipe(c *gin.Context) {
+	r.svc.GetAllRecipe(c)
+}
+
+
+
+
+func RecipeControllerInit(recipeSvc service.RecipeService) *RecipeControllerImpl {
+	return &RecipeControllerImpl{
+		svc: recipeSvc,
+	}
+}
