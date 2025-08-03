@@ -16,6 +16,19 @@ type RecipeControllerImpl struct {
 	svc service.RecipeService
 }
 
+
+// Recipe Controller godoc
+//@BasePath /api/v1/recipe
+// Recipe godoc
+// @Summary Get All Recipes
+// @ID get-all-recipes
+// @Schemes
+// @Description Get all Recipes
+// @Tags Recipe
+// @Accept json
+// @Produce json
+// @Success 200 {array} models.Recipe
+// @Router /recipe [get]
 func (r RecipeControllerImpl) GetAllRecipe(c *gin.Context) {
 	r.svc.GetAllRecipe(c)
 }

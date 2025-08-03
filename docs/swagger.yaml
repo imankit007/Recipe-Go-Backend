@@ -1,4 +1,79 @@
+definitions:
+  models.Category:
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+    type: object
+  models.Ingredient:
+    properties:
+      id:
+        type: string
+      image_url:
+        type: string
+      name:
+        type: string
+    type: object
+  models.Instruction:
+    properties:
+      id:
+        type: string
+      recipeID:
+        type: string
+      stepNumber:
+        type: integer
+      stepText:
+        type: string
+    type: object
+  models.Recipe:
+    properties:
+      Description:
+        type: string
+      categories:
+        items:
+          $ref: '#/definitions/models.Category'
+        type: array
+      cookTimeMin:
+        type: integer
+      id:
+        type: string
+      imageURL:
+        type: string
+      ingredients:
+        items:
+          $ref: '#/definitions/models.Ingredient'
+        type: array
+      instructions:
+        items:
+          $ref: '#/definitions/models.Instruction'
+        type: array
+      prepTimeMin:
+        type: integer
+      servings:
+        type: integer
+      title:
+        type: string
+    type: object
 info:
   contact: {}
-paths: {}
+paths:
+  /recipe:
+    get:
+      consumes:
+      - application/json
+      description: Get all Recipes
+      operationId: get-all-recipes
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Recipe'
+            type: array
+      summary: Get All Recipes
+      tags:
+      - Recipe
 swagger: "2.0"
