@@ -10,14 +10,26 @@ type Initialization struct {
 	recipeRepo repositories.RecipeRepository
 	recipeSvc  service.RecipeService
 	RecipeCtrl controller.RecipeController
+
+	AuthController controller.AuthController
+	authService service.AuthService
+	userRepo repositories.UserRepository
+
 }
 
 func NewInitialization(recipeRepo repositories.RecipeRepository,
 	recipeSvc service.RecipeService,
-	recipeCtrl controller.RecipeController) *Initialization {
+	recipeCtrl controller.RecipeController,
+	userRepo repositories.UserRepository,
+	authSvc service.AuthService,
+	authCtrl controller.AuthController,
+	) *Initialization {
 	return &Initialization{
 		recipeRepo: recipeRepo,
 		recipeSvc:  recipeSvc,
 		RecipeCtrl: recipeCtrl,
+		userRepo: userRepo,
+		authService: authSvc,
+		AuthController: authCtrl,
 	}
 }

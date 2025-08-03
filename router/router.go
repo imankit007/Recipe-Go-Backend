@@ -13,12 +13,17 @@ func Init(init *config.Initialization) *gin.Engine {
 	router.Use(gin.Recovery())
 
 	api := router.Group("/api/v1")
-	{
+	{	
+
+		authRouter := api.Group("/")
+
+		authRouter.POST("/login", )
+
+
 		user := api.Group("/user")
 		user.GET("", func(c *gin.Context) {
 			c.Writer.WriteString("Users API")
 		})
-
 		recipe := api.Group("/recipe")
 
 		recipe.GET("", init.RecipeCtrl.GetAllRecipe)

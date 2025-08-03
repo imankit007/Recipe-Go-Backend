@@ -21,7 +21,10 @@ func Init() *Initialization {
 	recipeRepositoryImpl := repositories.RecipeRepositoryInit(gormDB)
 	recipeServiceImpl := service.RecipeServiceInit(recipeRepositoryImpl)
 	recipeControllerImpl := controller.RecipeControllerInit(recipeServiceImpl)
-	initialization := NewInitialization(recipeRepositoryImpl, recipeServiceImpl, recipeControllerImpl)
+	userRepositoryImpl := repositories.UserRepositoryInit(gormDB)
+	authServiceImpl := service.AuthServiceInit(userRepositoryImpl)
+	authControllerImpl := controller.AuthControllerInit(authServiceImpl)
+	initialization := NewInitialization(recipeRepositoryImpl, recipeServiceImpl, recipeControllerImpl, userRepositoryImpl, authServiceImpl, authControllerImpl)
 	return initialization
 }
 
@@ -34,3 +37,9 @@ var recipeServiceSet = wire.NewSet(service.RecipeServiceInit, wire.Bind(new(serv
 var recipeRepoSet = wire.NewSet(repositories.RecipeRepositoryInit, wire.Bind(new(repositories.RecipeRepository), new(*repositories.RecipeRepositoryImpl)))
 
 var recipeCtrlSet = wire.NewSet(controller.RecipeControllerInit, wire.Bind(new(controller.RecipeController), new(*controller.RecipeControllerImpl)))
+
+var userRepoSet = wire.NewSet(repositories.UserRepositoryInit, wire.Bind(new(repositories.UserRepository), new(*repositories.UserRepositoryImpl)))
+
+var authServiceSet = wire.NewSet(service.AuthServiceInit, wire.Bind(new(service.AuthService), new(*service.AuthServiceImpl)))
+
+var authControllerSet = wire.NewSet(controller.AuthControllerInit, wire.Bind(new(controller.AuthController), new(*controller.AuthControllerImpl)))
