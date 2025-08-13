@@ -16,9 +16,8 @@ type RecipeControllerImpl struct {
 	svc service.RecipeService
 }
 
-
 // Recipe Controller godoc
-//@BasePath /api/v1/recipe
+// @BasePath /api/v1/
 // Recipe godoc
 // @Summary Get All Recipes
 // @ID get-all-recipes
@@ -33,8 +32,21 @@ func (r RecipeControllerImpl) GetAllRecipe(c *gin.Context) {
 	r.svc.GetAllRecipe(c)
 }
 
-func (r RecipeControllerImpl) 	AddRecipe(c *gin.Context) {
-	r.svc.GetAllRecipe(c)
+// Recipe Controller godoc
+// @BasePath /api/v1
+// Recipe godoc
+// @Summary Add a Recipe
+// @ID add-recipes
+// @Schemes
+// @Description Add a Recipe
+// @Tags Recipe
+// @Accept json
+// @Produce json
+// @Success 200 {object} models.Recipe
+// @Param recipe body dto.Recipe true "Recipe Data"
+// @Router /recipe [post]
+func (r RecipeControllerImpl) AddRecipe(c *gin.Context) {
+	r.svc.AddRecipe(c)
 }
 
 func (r RecipeControllerImpl) GetRecipeById(c *gin.Context) {
@@ -44,9 +56,6 @@ func (r RecipeControllerImpl) GetRecipeById(c *gin.Context) {
 func (r RecipeControllerImpl) UpdateRecipe(c *gin.Context) {
 	r.svc.GetAllRecipe(c)
 }
-
-
-
 
 func RecipeControllerInit(recipeSvc service.RecipeService) *RecipeControllerImpl {
 	return &RecipeControllerImpl{

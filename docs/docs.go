@@ -40,10 +40,92 @@ const docTemplate = `{
                         }
                     }
                 }
+            },
+            "post": {
+                "description": "Add a Recipe",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Recipe"
+                ],
+                "summary": "Add a Recipe",
+                "operationId": "add-recipes",
+                "parameters": [
+                    {
+                        "description": "Recipe Data",
+                        "name": "recipe",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.Recipe"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Recipe"
+                        }
+                    }
+                }
             }
         }
     },
     "definitions": {
+        "dto.Instruction": {
+            "type": "object",
+            "properties": {
+                "step": {
+                    "type": "string"
+                }
+            }
+        },
+        "dto.Recipe": {
+            "type": "object",
+            "properties": {
+                "categories": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "cook_time": {
+                    "type": "integer"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "image_url": {
+                    "type": "string"
+                },
+                "ingredients": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "instructions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dto.Instruction"
+                    }
+                },
+                "prep_time": {
+                    "type": "integer"
+                },
+                "servings": {
+                    "type": "integer"
+                },
+                "title": {
+                    "type": "string"
+                }
+            }
+        },
         "models.Category": {
             "type": "object",
             "properties": {
@@ -89,22 +171,22 @@ const docTemplate = `{
         "models.Recipe": {
             "type": "object",
             "properties": {
-                "Description": {
-                    "type": "string"
-                },
                 "categories": {
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/models.Category"
                     }
                 },
-                "cookTimeMin": {
+                "cook_time": {
                     "type": "integer"
+                },
+                "description": {
+                    "type": "string"
                 },
                 "id": {
                     "type": "string"
                 },
-                "imageURL": {
+                "image_url": {
                     "type": "string"
                 },
                 "ingredients": {
@@ -119,7 +201,7 @@ const docTemplate = `{
                         "$ref": "#/definitions/models.Instruction"
                     }
                 },
-                "prepTimeMin": {
+                "prep_time": {
                     "type": "integer"
                 },
                 "servings": {

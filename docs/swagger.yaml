@@ -1,4 +1,36 @@
 definitions:
+  dto.Instruction:
+    properties:
+      step:
+        type: string
+    type: object
+  dto.Recipe:
+    properties:
+      categories:
+        items:
+          type: string
+        type: array
+      cook_time:
+        type: integer
+      description:
+        type: string
+      image_url:
+        type: string
+      ingredients:
+        items:
+          type: string
+        type: array
+      instructions:
+        items:
+          $ref: '#/definitions/dto.Instruction'
+        type: array
+      prep_time:
+        type: integer
+      servings:
+        type: integer
+      title:
+        type: string
+    type: object
   models.Category:
     properties:
       id:
@@ -28,17 +60,17 @@ definitions:
     type: object
   models.Recipe:
     properties:
-      Description:
-        type: string
       categories:
         items:
           $ref: '#/definitions/models.Category'
         type: array
-      cookTimeMin:
+      cook_time:
         type: integer
+      description:
+        type: string
       id:
         type: string
-      imageURL:
+      image_url:
         type: string
       ingredients:
         items:
@@ -48,7 +80,7 @@ definitions:
         items:
           $ref: '#/definitions/models.Instruction'
         type: array
-      prepTimeMin:
+      prep_time:
         type: integer
       servings:
         type: integer
@@ -74,6 +106,28 @@ paths:
               $ref: '#/definitions/models.Recipe'
             type: array
       summary: Get All Recipes
+      tags:
+      - Recipe
+    post:
+      consumes:
+      - application/json
+      description: Add a Recipe
+      operationId: add-recipes
+      parameters:
+      - description: Recipe Data
+        in: body
+        name: recipe
+        required: true
+        schema:
+          $ref: '#/definitions/dto.Recipe'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Recipe'
+      summary: Add a Recipe
       tags:
       - Recipe
 swagger: "2.0"

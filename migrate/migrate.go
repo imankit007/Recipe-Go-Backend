@@ -16,7 +16,7 @@ func init() {
 func main() {
 	var err error
 	log.Default().Println("Start Migrate Database...")
-	err = initializers.DB.AutoMigrate(&models.User{}, &models.Category{},&models.Ingredient{},&models.Recipe{},&models.Instruction{})
+	err = initializers.DB.AutoMigrate(&models.User{}, &models.Category{}, &models.Ingredient{}, &models.Recipe{}, &models.Instruction{})
 	if err != nil {
 		log.Fatal("Migration Failed")
 	}
